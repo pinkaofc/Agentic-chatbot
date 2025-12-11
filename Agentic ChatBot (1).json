@@ -1,0 +1,222 @@
+{
+  "name": "Agentic ChatBot",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -416,
+        -64
+      ],
+      "id": "61af720e-c9f5-459e-8c80-8bbc988c39e3",
+      "name": "When chat message received",
+      "webhookId": "95a9773c-f2dc-4582-8118-c0bfdafebaef"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "96a33189-73c6-4df4-ab7f-0e1dfb42a9f0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        144
+      ],
+      "id": "55e6e0e8-2335-46b8-995b-659c248fff97",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "qDWm65a1Pp5xudKc",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 14
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        144
+      ],
+      "id": "f2798a40-6436-4b6e-883f-d8ba4ef4ea08",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1dJMoB8Zc1Ocr6n7IdFyrHS9klC3NalqyShExrchS3Kg",
+          "mode": "list",
+          "cachedResultName": "chatbot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dJMoB8Zc1Ocr6n7IdFyrHS9klC3NalqyShExrchS3Kg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 752169850,
+          "mode": "list",
+          "cachedResultName": "Expense Tracker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dJMoB8Zc1Ocr6n7IdFyrHS9klC3NalqyShExrchS3Kg/edit#gid=752169850"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Expense": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Expense', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Charge Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Charge_Date', ``, 'string') }}",
+            "Cadence": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Cadence', ``, 'string') }}",
+            "Cost": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Cost', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Expense",
+              "displayName": "Expense",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Charge Date",
+              "displayName": "Charge Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Cadence",
+              "displayName": "Cadence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Cost",
+              "displayName": "Cost",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        144
+      ],
+      "id": "c57345f4-3999-4c65-8527-857daf8bfd32",
+      "name": "AddEntry",
+      "credentials": {
+        "googleApi": {
+          "id": "vpNOCiOnoeQXzp9L",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AddEntry": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2841f298-bae4-47fa-bf84-bdc9534240a2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "581de81b2260473d265cc00d3dc9ca1fade97cdb07ad56820832eb40a1752070"
+  },
+  "id": "uwJ3KMyBNOLyUVO0",
+  "tags": []
+}

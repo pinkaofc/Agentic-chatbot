@@ -121,6 +121,3 @@ It demonstrates practical skills in:
 * Prompt engineering
 * LLM tool-calling
 * Real, production-style integrations
-
-
-Just tell me!

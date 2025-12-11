@@ -41,6 +41,8 @@ Chat Trigger → LLM Agent (Gemini) → Memory Buffer → Tool (Google Sheets) �
 
 ## 🤖 **How the Agent Works**
 
+<img src="./3ss.png" width="650">
+
 ### **1. Chat Trigger**
 
 Activates whenever the user sends a message.
